@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;900&display=swap');
+
+body {
+    background-color: #E0E0E0;
+    font-family: Heebo;
+}
+
+.wrapper {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -50px;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.wrapper p{
+    text-align: center;
+}
+
+.title {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+    color: #1D201C;
+    border-bottom: 1px solid #ECECEC;
+    margin-bottom: 5rem;
+}
+
+.title h2 {
+    font-size: 3.1rem;
+    padding: 2rem;
+}
+
+.title img {
+    width: 60px;
+    height: 51px;
+    margin: 1rem;
+}
+
+input[type=text],
+input[type=password]
+ {
+    background-color: #EAEAEA;
+}
+
+.submit {
+    display: flex;
+    justify-content: center;
+}
+
+.btn {
+    width: 200px;
+    background-color: #FFC200;
+    border: none;
+    border-radius: 25px;
+    font-family: 1rem;
+}
+
+.btn:hover {
+    background-color: #DDAD17;
+}
+
+input[type=reset] {
+    color: #fff;
+    margin-left: 0.25rem;
+}
+</style>
