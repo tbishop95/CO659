@@ -30,6 +30,6 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
           <button type="submit">KSB PAGE</button>
         </form>
     </p>
-    
+
 </body>
 </html>
