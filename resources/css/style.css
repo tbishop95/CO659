@@ -21,6 +21,7 @@ body {
     text-align: center;
 }
 
+
 .title {
     display: flex;
     flex-direction: row;
@@ -71,4 +72,3 @@ input[type=reset] {
     color: #fff;
     margin-left: 0.25rem;
 }
-</style>
