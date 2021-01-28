@@ -31,14 +31,14 @@ if($rows>0)
 	$_SESSION['username']=$username;
 	if(isset($_POST['rememberMe']))
 	{
-		header("Location:profile.php");
+		header("Location:home.php");
 
 		setcookie("username", $_POST['username'], time() + (365*60*24*24));
 
 		setcookie("password", $_POST['password'], time() + (365*60*24*24));
 	}
 	else {
-		header("Location:profile.php");
+		header("Location:home.php");
 
 		setcookie("username", "");
 		setcookie("password", "");
