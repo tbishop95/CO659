@@ -26,8 +26,6 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     <p>
         <a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>
         <a href="logout.php" class="btn btn-danger">Sign Out of Your Account</a>
-        <br>
-        <br>
         <a href="ksb.php" class="btn btn-warning">KSB Page</a>
     </p>
 
