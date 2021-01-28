@@ -89,7 +89,7 @@
        Evidence Needs to be Uploaded to Pass Degree Apprenticeship
      </p>
      <p>
-       <a href="journal.php" class="btn btn-warning"> Upload Evidence</a>
+       <a href="evidence.php" class="btn btn-warning"> Upload Evidence</a>
      </p>
    </div>
  </body>
