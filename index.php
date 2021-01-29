@@ -1,9 +1,11 @@
 <?php
 session_start();
 
-if(isset($_POST['submit'])) 
+
+if(isset($_POST['submit']))
 {
-	include('lib/connection.php');	
+	include('lib/connection.php');
+
 	$error="";
 
 // Check all fields have been entered
@@ -23,7 +25,6 @@ if(isset($_POST['submit']))
 
 	$hash_password = hash('sha256', $password);
 
-	
 
 // Check if username already exists
 	$sql="SELECT * FROM users WHERE Username='$username'";
@@ -43,12 +44,14 @@ if(isset($_POST['submit']))
 
 	if(empty($error))
 	{
+
 		$sql="INSERT INTO users (Name, Email, Username, Password, Year, Institute, Tutor) VALUES('$name', '$email', '$username', '$hash_password', '$year', '$institute', '$tutor')";
+
 		$result=mysqli_query($conn,$sql);
 
 		if($result)
 		{
-			
+
 			$_SESSION['name']=$name;
 			$_SESSION['username']=$username;
 			$_SESSION['email']=$email;
@@ -93,4 +96,6 @@ if(isset($_POST['submit']))
 		<a href="login.php"><button class="btn"type ="submit">Have an account? Sign In</button></a>
 	</div>
 </body>
+
 </html>
+
