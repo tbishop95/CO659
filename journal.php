@@ -5,23 +5,24 @@ include('lib/connection.php');
 
 $username=$_SESSION['username'];
 
+
 //edits journal entry
 if(isset($_POST['edit'])){
-  $query = "UPDATE journal SET journal='$_POST[journaledit]' WHERE username ='$username'";
+  $query = "UPDATE journal SET journal='$_POST[journaledit]' WHERE id ='$_POST[journalid] '";
 	mysqli_query($conn,$query);
 }
 
 //deletes journal entry
 if(isset($_POST['delete'])){
-  $DeleteQuery = "Delete FROM journal WHERE id ='$_POST[id]'";
+  $DeleteQuery = "Delete FROM journal WHERE id ='$_POST[journalid]'";
 	 mysqli_query($conn,$DeleteQuery);
 }
 
-//display all journal entries from current user logged in
-$sql = "SELECT * from journal WHERE username ='$username'";
+//display all journal entries from current user logged in.
+$sql = "SELECT * from journal WHERE Username ='$username'";
 $result = mysqli_query($conn,$sql);
 
-//Fetching user details
+//Fetching user details from user database tabel for nav bar.
 
 $sql="SELECT * FROM users WHERE username='$username'";
 
@@ -100,13 +101,12 @@ if($rows>0)
       ?>
       <form action="" method="post">
       <tr>
-        <td>
-          <div class="readOnly">
-        <td>  <input type="text" name="journaledit" wrap="off" value="<?php echo $row['journal'];?>"> </td>
-        <td>    <button type="submit" class="btn" name="edit">Edit</button>
+
+        <td>  <input type="text" name="journaledit" wrap="off" value="<?php echo $row['journal'];?>">
+          <input type="hidden" name="journalid" wrap="off" value="<?php echo $row['id'];?>">
+          <button type="submit" class="btn" name="edit">Edit</button>
               <button type="submit" class="btn"name="delete">Delete</button> </td>
-              <div>
-            </td>
+
           </tr>
         </form>
     <?php
@@ -115,6 +115,5 @@ if($rows>0)
 <!--    <textarea type="text"name="journaledit" wrap="off"><?php echo $row['journal'];?></textarea> -->
     </table>
   </div>
-
     </body>
 </html>
