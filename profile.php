@@ -4,7 +4,8 @@ include('lib/connection.php');
 
 $username=$_SESSION['username'];
 
-$sql="SELECT * FROM users WHERE username='$username'";
+
+$sql="SELECT * FROM users WHERE Username='$username'";
 
 $result=mysqli_query($conn,$sql);
 
@@ -33,8 +34,10 @@ if($rows>0)
 			<h5>KSB Portal</h5>
 		</div>
 		<div class="user">
-			<h4>Welcome <?php echo $array['name']; ?></h6>
-				<h6 class="year">Year of Study : <?php echo $array['year']; ?></h5>
+
+			<h4>Welcome <?php echo $array['Name']; ?></h6>
+				<h6 class="year">Year of Study : <?php echo $array['Year']; ?></h5>
+
 				</div>
 				<div class="nav">
 					<h4>Menu</h4>
@@ -68,4 +71,6 @@ if($rows>0)
 				<a href="deleteAccount.php"><button class="btn"type ="submit">Delete Account</button></a>
 			</div>
 		</body>
+
 		</html>
+
