@@ -5,15 +5,16 @@ session_start();
 <html>
 <body>
 
-<?php
+	<?php
 // remove all session variables
-session_unset(); 
+	session_unset(); 
 
-// destroy the session 
-session_destroy(); 
+// destroy data from current session, does not unset cookies
+	session_destroy(); 
 
-header('Location:login.php');
-?>
+// return the user to the login pag 
+	header('Location:login.php');
+	?>
 
 </body>
 </html>

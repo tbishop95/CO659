@@ -4,27 +4,44 @@ session_start();
 $error="";
 if(isset($_POST['submit']))
 {
-include('lib/connection.php');
+	include('lib/connection.php');
 
-if($_POST['newpassword']==$_POST['confirmpassword'])
-{
+	if($_POST['newpassword']==$_POST['confirmpassword'])
+	{
+
+		$username=$_SESSION['username'];
+
+		$confirmpassword=mysqli_escape_string($conn,filter_var(strip_tags($_POST['confirmpassword']),FILTER_SANITIZE_STRIPPED));
+
+
+		$hash_password = hash('sha256', $confirmpassword);
+
+		$sql="UPDATE users SET Password='$hash_password' WHERE Username='$username'";
+
+		$result=mysqli_query($conn,$sql);
+
+
+	}
+	else{
+		$error = "Password's do not match";
+	}
+}
+?>
+<?php
+
+include('lib/connection.php');
 
 $username=$_SESSION['username'];
 
-$confirmpassword=mysqli_escape_string($conn,filter_var(strip_tags($_POST['confirmpassword']),FILTER_SANITIZE_STRIPPED));
-
-
-$hash_password = hash('sha256', $confirmpassword);
-
-$sql="UPDATE users SET Password='$hash_password' WHERE Username='$username'";
+$sql="SELECT * FROM users WHERE Username='$username'";
 
 $result=mysqli_query($conn,$sql);
 
+$rows=mysqli_num_rows($result);
 
-}
-else{
-	$error = "Password's do not match";
-}
+if($rows>0)
+{
+	$array=mysqli_fetch_assoc($result);
 }
 ?>
 
@@ -33,6 +50,9 @@ else{
 <head>
 	<link rel="stylesheet" type="text/css" href="resources/css/mainStyle.css">
 	<title>KSB Portal - Change Password</title>
+	<style type="text/css">
+		.verification{ color: green; margin:; 1rem; }
+	</style>
 </head>
 <body>
 	<div class="sideNav">

@@ -13,7 +13,7 @@ if(isset($_POST['submit']))
 	{
 		$error="Please complete all fields";
 	}
-
+// Strip tags from input data to prevent SQL injections
 	$name=mysqli_escape_string($conn,filter_var(strip_tags($_POST['name']),FILTER_SANITIZE_STRIPPED));
 	$username=mysqli_escape_string($conn,filter_var(strip_tags($_POST['username']),FILTER_SANITIZE_STRIPPED));
 	$password=mysqli_escape_string($conn,filter_var(strip_tags($_POST['password']),FILTER_SANITIZE_STRIPPED));
@@ -26,7 +26,7 @@ if(isset($_POST['submit']))
 	$hash_password = hash('sha256', $password);
 
 
-// Check if username already exists
+// Check if username already exists in the database
 	$sql="SELECT * FROM users WHERE Username='$username'";
 	$result=mysqli_query($conn,$sql);
 
@@ -34,7 +34,7 @@ if(isset($_POST['submit']))
 	{
 		$error="Username already exists";
 	}
-// Check if email already exists
+// Check if email already exists in the database
 	$sql="SELECT * FROM users WHERE Email='$email'";
 	$result=mysqli_query($conn,$sql);
 	if(mysqli_num_rows($result)>0)
@@ -72,15 +72,15 @@ if(isset($_POST['submit']))
 	<link rel="stylesheet" type="text/css" href="resources/css/style.css">
 	<title>KSB Portal Registration</title>
 	<style type="text/css">
-        body{ font: 14px sans-serif; }
-        .wrapper{ width: 450px; padding: 20px; }
-    </style>
+		body{ font: 14px sans-serif; }
+		.wrapper{ width: 450px; padding: 20px; }
+	</style>
 </head>
 <body>
 	<div class="wrapper">
 		<div class="title">
 			<img src="resources/images/logo.png">
-		    <h1>Create Account</h1>
+			<h1>Create Account</h1>
 		</div>
 		<form class="form" method ="post" action="index.php">
 			<input type="text" name="name" placeholder="Name"/>
@@ -91,7 +91,7 @@ if(isset($_POST['submit']))
 			<input type="text" name="institute" placeholder="Institute"/>
 			<input type="text" name="tutor" placeholder="Assigned Tutor"/>
 			<button type="submit" name="submit" class="btn">Sign Up</button>
-			<span><?php if(isset($error)) {echo $error;}?></span>
+			<span style="color: red"><?php if(isset($error)) {echo $error;}?></span>
 		</form>
 		<a href="login.php"><button class="btn"type ="submit">Have an account? Sign In</button></a>
 	</div>
