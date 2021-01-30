@@ -7,7 +7,7 @@ body {
 
 .wrapper {
     position: absolute;
-    top: 20%;
+    top: 40%;
     left: 50%;
     margin-top: -50px;
     margin-left: -50px;
@@ -15,7 +15,6 @@ body {
     flex-direction: column;
     background-color: #fff;
     border-radius: 10px;
-    align-items: center;
 }
 
 .wrapper p{
@@ -31,11 +30,11 @@ body {
     text-align: center;
     color: #1D201C;
     border-bottom: 1px solid #ECECEC;
-    margin-bottom: 3rem;
+    margin-bottom: 5rem;
 }
 
-.title h1 {
-    font-size: 2rem;
+.title h2 {
+    font-size: 3.1rem;
     padding: 2rem;
 }
 
@@ -45,48 +44,31 @@ body {
     margin: 1rem;
 }
 
-.form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-
 input[type=text],
-input[type=password],
-input[type=email]
+input[type=password]
  {
     background-color: #EAEAEA;
-    border-radius: 10px;
-    padding:10px;
-    margin: 0.25rem;
-    width:100%;
+}
+
+.submit {
+    display: flex;
+    justify-content: center;
 }
 
 .btn {
     width: 200px;
-    padding: 1rem;
     background-color: #FFC200;
     border: none;
     border-radius: 25px;
     font-family: 1rem;
-    margin: 1rem;
 }
 
 .btn:hover {
     background-color: #DDAD17;
 }
 
-a {
-    text-decoration: none;
-    color: #000;
-}
-
-.forgot {
-    text-decoration: underline;
-}
-
-span {
-    color: #000;
+input[type=reset] {
+    color: #fff;
+    margin-left: 0.25rem;
 }
 </style>

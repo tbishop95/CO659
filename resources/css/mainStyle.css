@@ -108,6 +108,7 @@ input[type=email]
     background-color: #DDAD17;
 }
 
+
 .table{
   border-collapse:separate;
   border-spacing: 20px 15px;
@@ -122,3 +123,4 @@ textarea{
   border: none;
   resize: none;
 }
+
