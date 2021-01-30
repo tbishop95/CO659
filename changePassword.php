@@ -1,5 +1,5 @@
-
 <?php
+
 session_start();
 $error="";
 if(isset($_POST['submit']))
@@ -27,23 +27,6 @@ if(isset($_POST['submit']))
 	}
 }
 ?>
-<?php
-
-include('lib/connection.php');
-
-$username=$_SESSION['username'];
-
-$sql="SELECT * FROM users WHERE Username='$username'";
-
-$result=mysqli_query($conn,$sql);
-
-$rows=mysqli_num_rows($result);
-
-if($rows>0)
-{
-	$array=mysqli_fetch_assoc($result);
-}
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -61,8 +44,7 @@ if($rows>0)
 			<h5>KSB Portal</h5>
 		</div>
 		<div class="user">
-			<h4>Welcome <?php echo $array['Name']; ?></h6>
-				<h6 class="year">Year of Study : <?php echo $array['Name']; ?></h5>
+			
 				</div>
 				<div class="nav">
 					<h4>Menu</h4>
