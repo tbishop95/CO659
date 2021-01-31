@@ -2,10 +2,11 @@
 session_start();
 include('lib/connection.php');
 $username=$_SESSION['username'];
-  $sql = "INSERT INTO journal (journal,username,id) ";
-  	$sql = $sql . " values ('$_POST[journalentry]', '$username', '$_POST[id]')";
 
-  //	$link =mysqli_connect("127.0.0.1","root","","db1_21406612");
+$journalentry = mysqli_real_escape_string($conn, $_POST['journalentry']);
+
+  $sql = "INSERT INTO journal (journal,username) ";
+  	$sql = $sql . " values ('$journalentry', '$username')";
 
   	if ($conn->query($sql) === TRUE) {
       echo "New record created successfully<br/>";

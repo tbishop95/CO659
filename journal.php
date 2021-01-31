@@ -5,10 +5,10 @@ include('lib/connection.php');
 
 $username=$_SESSION['username'];
 
-
 //edits journal entry
 if(isset($_POST['edit'])){
-  $query = "UPDATE journal SET journal='$_POST[journaledit]' WHERE id ='$_POST[journalid] '";
+  $journal =mysqli_real_escape_string($conn, $_POST['journaledit']);
+  $query = "UPDATE journal SET journal='$journal'WHERE id = '$_POST[journalid]'";
 	mysqli_query($conn,$query);
 }
 
@@ -19,7 +19,8 @@ if(isset($_POST['delete'])){
 }
 
 //display all journal entries from current user logged in.
-$sql = "SELECT * from journal WHERE Username ='$username'";
+$sql = "SELECT * from journal WHERE Username ='$username'
+ORDER BY date DESC";
 $result = mysqli_query($conn,$sql);
 
 //Fetching user details from user database tabel for nav bar.
@@ -42,9 +43,7 @@ if($rows>0)
 <head>
     <meta charset="UTF-8">
     <title>KSB Journal</title>
-  <!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
     	<link rel="stylesheet" type="text/css" href="resources/css/mainStyle.css">
-
 </head>
   <body>
 
@@ -74,46 +73,42 @@ if($rows>0)
   					<h1>Journal</h1>
   					<span class=breakLine></span>
   				</div>
-
+<div class="profilejournal">
     <!--Submit a journal entry-->
-
-    <table class="table table-borderless ">
+    <table class="journaltable">
   <form  action="Submit.php" method="post">
-      <tr>
-        <td>
-          <div class="readOnly">
-  <td><input type="text" name="journalentry" placeholder="Enter text here...."></td>
-              <!-- <textarea class="form-control" type="text" name="journalentry" rows="1" placeholder="Enter text here...."></textarea> -->
-          <td><button type="submit" class="btn" value="Insert"> Submit Entry </button> </td>
-          </div>
-        </td>
+      <tr class="journaltd">
+        <td class="journaltd">
+          <textarea type="text" class="journalbox"name="journalentry" placeholder="Enter text here...."></textarea>
+          <button type="submit" class="btnj" value="Insert"> Save </button></td>
       </tr>
       </form>
 </table>
 
 <!--Display journal entries -->
-      <!--  <div class="container"> -->
-          <table class="table table-borderless ">
+          <table class="journaltable">
     <?php
 
 //Display all journal entries in database
      while ($row = mysqli_fetch_array($result)){
       ?>
       <form action="" method="post">
-      <tr>
-
-        <td>  <input type="text" name="journaledit" wrap="off" value="<?php echo $row['journal'];?>">
+      <tr class="journaltd">
+        <td class="journaltd">
+          <p class="plain"><u><?php echo $row['username'],"  " ,"  ", $row['date'];?></u></p>
+          <textarea type="text"name="journaledit" class="journaleditbox"><?php echo $row['journal'];?></textarea>
           <input type="hidden" name="journalid" wrap="off" value="<?php echo $row['id'];?>">
-          <button type="submit" class="btn" name="edit">Edit</button>
-              <button type="submit" class="btn"name="delete">Delete</button> </td>
-
+          <button type="submit" class="btnj" name="edit">Save</button>
+              <button type="submit" class="btnj"name="delete">Delete</button> </td>
           </tr>
         </form>
     <?php
   }
   ?>
-<!--    <textarea type="text"name="journaledit" wrap="off"><?php echo $row['journal'];?></textarea> -->
+<!--    <textarea type="text"name="journaledit" wrap="off"><?php echo $row['journal'];?></textarea>
+<td class="g"><textarea type="text" name="journaledit" value="<?php echo $row['journal'];?>">-->
     </table>
   </div>
+</div>
     </body>
 </html>

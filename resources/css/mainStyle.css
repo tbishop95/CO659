@@ -124,3 +124,64 @@ textarea{
   resize: none;
 }
 
+/* Journal Page Styling */
+
+.journaltable{
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  padding-top: 10px;
+  border-spacing:5px;
+}
+.journalbox{
+  width: 75%;
+  height:50px;
+  align: center;
+  vertical-align: middle;
+  font-size: 15px;
+  background-color: #ffff;
+  font-family: Heebo;
+  padding: 15px;
+  border-radius: 25px;
+}
+.journaleditbox{
+  width: 58%;
+  height:50px;
+  align: center;
+  vertical-align: middle;
+  font-size: 15px;
+  background-color: #ffff;
+  font-family: Heebo;
+  padding: 15px;
+  border-radius: 25px;
+}
+.journaltd{
+  background-color: #ffff;
+  width: 900px;
+}
+
+.plain{
+  font-family: Heebo;
+  margin: 5px;
+}
+
+.btnj {
+    width: 130px;
+    padding: 1rem;
+    background-color: #FFC200;
+    border: none;
+    border-radius: 25px;
+    font-family: 1rem;
+    margin: 1rem;
+}
+.profilejournal {
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #eeebe5;
+    margin-left: 2rem;
+    border: none;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
