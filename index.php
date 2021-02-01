@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-if(isset($_POST['submit'])) 
+if(isset($_POST['submit']))
 {
-	include('lib/connection.php');	
+	include('lib/connection.php');
 	$error="";
 
 // Check all fields have been entered
@@ -23,7 +23,7 @@ if(isset($_POST['submit']))
 
 	$hash_password = hash('sha256', $password);
 
-	
+
 
 // Check if username already exists
 	$sql="SELECT * FROM users WHERE Username='$username'";
@@ -48,7 +48,7 @@ if(isset($_POST['submit']))
 
 		if($result)
 		{
-			
+
 			$_SESSION['name']=$name;
 			$_SESSION['username']=$username;
 			$_SESSION['email']=$email;
