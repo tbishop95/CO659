@@ -1,24 +1,38 @@
 <?php
-include("config.php");
 // Initialize the session
 session_start();
+include('lib/connection.php');
 
+$username=$_SESSION['username'];
 
 //edits journal entry
 if(isset($_POST['edit'])){
-  $query = "UPDATE journal SET journal='$_POST[journaledit]' WHERE id ='$_POST[id]'";
-	mysqli_query($link,$query);
+  $query = "UPDATE journal SET journal='$_POST[journaledit]' WHERE username ='$username'";
+	mysqli_query($conn,$query);
 }
+
 //deletes journal entry
 if(isset($_POST['delete'])){
   $DeleteQuery = "Delete FROM journal WHERE id ='$_POST[id]'";
-	 mysqli_query($link,$DeleteQuery);
+	 mysqli_query($conn,$DeleteQuery);
 }
 
 //display all journal entries from current user logged in
-$sql = "SELECT * from journal WHERE user_id ='$_SESSION[id]'";
-$result = mysqli_query($link,$sql);
+$sql = "SELECT * from journal WHERE username ='$username'";
+$result = mysqli_query($conn,$sql);
 
+//Fetching user details
+
+$sql="SELECT * FROM users WHERE username='$username'";
+
+$results=mysqli_query($conn,$sql);
+
+$rows=mysqli_num_rows($results);
+
+if($rows>0)
+{
+	$array=mysqli_fetch_assoc($results);
+}
 
 ?>
 
@@ -26,62 +40,58 @@ $result = mysqli_query($link,$sql);
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Journal</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style type="text/css">
-        body{ font: 14px sans-serif; }
-
-        .journalwrapper {
-            margin: 20px auto;
-            width:1200px;
-            padding: 10px 10px 10px;
-            padding-top: 10px;
-            background-color:darkgray;
-            display: flex;
-            flex-direction: column;
-            border-radius: 10px;
-        }
-        .container{
-          margin: 20px auto;
-        }
-
-        .table{
-          border-collapse:separate;
-          border-spacing: 20px 15px;
-
-        }
-        td{
-          background-color: white;
-          border-radius: 10px;
-
-        }
-        textarea{
-          border: none;
-          resize: none;
-        }
-
-    </style>
+    <title>KSB Journal</title>
+  <!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
+    	<link rel="stylesheet" type="text/css" href="resources/css/mainStyle.css">
 
 </head>
   <body>
-<a href="welcome.php" class="btn btn-danger">Home</a>
-    <!--Submit a journal entry -->
-    <div class="journalwrapper">
-      <div class="container">
-          <form  action="Submit.php" method="post">
-            <div class="row">
-              <div class="col-sm-10">
-                <textarea class="form-control" type="text" name="journalentry" rows="1" placeholder="Enter text here...."></textarea>
-              </div>
-              <div class="col-sm">
-                <button type="submit" value="Insert"> Submit Entry </button>
-              </div>
-            </div>
-          </form>
-        </div>
+
+<!---nav bar --->
+    <div class="sideNav">
+  		<div class="navHeader">
+  			<img src="resources/images/logo.png">
+  			<h5>KSB Portal</h5>
+  		</div>
+  		<div class="user">
+  			<h4>Welcome <?php echo $array['name']; ?></h6>
+  				<h6 class="year">Year of Study : <?php echo $array['year']; ?></h5>
+  				</div>
+  				<div class="nav">
+  					<h4>Menu</h4>
+  					<a href="home.php">Home</a>
+  					<a href="ksb.php">My KSB's</a>
+  					<a href="journal.php">Journal</a>
+  					<a href="profile.php">Profile Settings</a>
+  				</div>
+  				<a href="logout.php"><button class="btn"type ="submit">Logout</button></a>
+  			</div>
+
+
+  			<div class="profile">
+  				<div class="title">
+  					<h1>Journal</h1>
+  					<span class=breakLine></span>
+  				</div>
+
+    <!--Submit a journal entry-->
+
+    <table class="table table-borderless ">
+  <form  action="Submit.php" method="post">
+      <tr>
+        <td>
+          <div class="readOnly">
+  <td><input type="text" name="journalentry" placeholder="Enter text here...."></td>
+              <!-- <textarea class="form-control" type="text" name="journalentry" rows="1" placeholder="Enter text here...."></textarea> -->
+          <td><button type="submit" class="btn" value="Insert"> Submit Entry </button> </td>
+          </div>
+        </td>
+      </tr>
+      </form>
+</table>
 
 <!--Display journal entries -->
-        <div class="container">
+      <!--  <div class="container"> -->
           <table class="table table-borderless ">
     <?php
 
@@ -91,19 +101,20 @@ $result = mysqli_query($link,$sql);
       <form action="" method="post">
       <tr>
         <td>
-            <textarea type="text"name="journaledit" wrap="off"><?php echo $row['journal'];?></textarea>
-            <input type="hidden"name="id" value="<?php echo $row['id'];?>">
-            <td><button type="submit" class="btn" name="edit">Edit</button></td>
-              <td><button type="submit" class="btn"name="delete">Delete</button></td>
+          <div class="readOnly">
+        <td>  <input type="text" name="journaledit" wrap="off" value="<?php echo $row['journal'];?>"> </td>
+        <td>    <button type="submit" class="btn" name="edit">Edit</button>
+              <button type="submit" class="btn"name="delete">Delete</button> </td>
+              <div>
             </td>
           </tr>
         </form>
     <?php
   }
   ?>
-
+<!--    <textarea type="text"name="journaledit" wrap="off"><?php echo $row['journal'];?></textarea> -->
     </table>
   </div>
-      </div>
+
     </body>
 </html>
