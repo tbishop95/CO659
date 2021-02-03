@@ -261,9 +261,6 @@ include('lib/connection.php');
      <br>
      <button type="submit" class="btn-warning" name="submit">Upload</button>
    </form>
-<?php
-$sql ="INSERT INTO evidence "
- ?>
 
  </body>
  </html>
