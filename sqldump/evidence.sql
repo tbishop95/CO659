@@ -18,23 +18,23 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `KSBportal`
+-- Database: `evidence`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ksb`
+-- Table structure for table `evidence`
 --
 
 CREATE TABLE `evidence` (
+  `id` int(11) NOT NULL,
   `description` longtext NOT NULL,
   `link` varchar(255) ,
-  `file` varchar DEFAULT NULL
+  `file` varchar DEFAULT NULL,
+  `username` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `ksb`
+-- Dumping data for table `journal`
 --
 
 
@@ -43,10 +43,20 @@ CREATE TABLE `evidence` (
 --
 
 --
--- Indexes for table `ksb`
+-- Indexes for table `journal`
 --
 ALTER TABLE `evidence`
+  ADD PRIMARY KEY (`id`);
 
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `journal`
+--
+ALTER TABLE `evidence`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

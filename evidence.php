@@ -1,6 +1,38 @@
 <?php
+// Initialize the session
 session_start();
 include('lib/connection.php');
+
+$username=$_SESSION['username'];
+
+//edits journal entry
+if(isset($_POST['edit'])){
+  $query = "UPDATE evidence SET evidence='$_POST[evidenceedit]' WHERE username ='$username'";
+	mysqli_query($conn,$query);
+}
+
+//deletes journal entry
+if(isset($_POST['delete'])){
+  $DeleteQuery = "Delete FROM evidence WHERE id ='$_POST[id]'";
+	 mysqli_query($conn,$DeleteQuery);
+}
+
+//display all journal entries from current user logged in
+$sql = "SELECT * from evidence WHERE username ='$username'";
+$result = mysqli_query($conn,$sql);
+
+//Fetching user details
+
+$sql="SELECT * FROM users WHERE username='$username'";
+
+$results=mysqli_query($conn,$sql);
+
+$rows=mysqli_num_rows($results);
+
+if($rows>0)
+{
+	$array=mysqli_fetch_assoc($results);
+}
 
 
 ?>
@@ -220,53 +252,26 @@ include('lib/connection.php');
        Evidence Needs to be Uploaded to Pass Degree Apprenticeship
      </p>
    </div>
-   <form class="form" method ="post" action="upload.php">
-     <table class="table table-borderless ">
-   <form  action="submitevidence.php" method="post">
-       <tr>
-         <td>
-           <div class="readOnly">
-   <td><input type="text" name="description" placeholder="Enter description here...."></td>
-   <td><input type="url" name="link" placeholder="Enter link here...."></td>
+ <table class="table table-borderless ">
+<form  action="submitevidence.php" method="post">
+   <tr>
+     <td>
+       <div class="readOnly">
+         <td><input type="text" name="description" placeholder="Enter description here...."></td>
+         <td><input type="url" name="link" placeholder="Enter link here...."></td>
+          <td><input  type="file" name="file" ></td>
 
-   <form action="/action_page.php" method="POST" enctype="multipart/form-data">
-   <td><input  type="file" name="file" ></td>   <!-- <textarea class="form-control" type="text" name="description" rows="1" placeholder="Enter text here...."></textarea> -->
-
-           </div>
-           <div class="file-upload">
-
-              <td><button type="submitevidence" class="btn-warning" name="submit">Upload</button></td>
-           </div>
-         </td>
-       </tr>
-       </form>
- </table>
+           <!-- <textarea class="form-control" type="text" name="journalentry" rows="1" placeholder="Enter text here...."></textarea> -->
+       <td><button type="submit" class="btn-warning" value="Insert"> Upload Evidence </button> </td>
+       </div>
+     </td>
+   </tr>
+   </form>
+</table>
 
  <!--Display all ksb evidence-->
-       <!--  <div class="container"> -->
-           <table class="table table-borderless ">
-             <?php
 
-         //Display all ksb evidence in database
-              while ($row = mysqli_fetch_array($result)){
-               ?>
-               <form action="" method="post">
 
-                 </form>
-             <?php
-           }
-           ?>
-     <label for="link">Link:</label>
-     <input type="url">
-     <br>
-     <button type="submit" class="btn-warning" name="submit">Upload</button>
-   </form>
 
  </body>
- </html>
- <?php
-   // Include config file
-   require_once "config.php";
-   $link->close();
-?>
-</div>
+</html>
